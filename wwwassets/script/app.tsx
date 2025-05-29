@@ -357,7 +357,7 @@ class App extends Component<{}, AppState> implements AppActions {
 		if (alt) inputMode = inputMode == 'clipboard' ? 'shift+insert' : 'clipboard';
 		ahkSend(cluster, inputMode);
 		if (inputMode == 'clipboard') this.setTooltip(`Copied: ${cluster}`);
-		if (!noRecent) increaseRecent(cluster);
+		increaseRecent(cluster);
 		if (variantOf) this.updateConfig(c => {
 			if (c.preferredVariant[variantOf] != cluster) return {
 				preferredVariant: {
