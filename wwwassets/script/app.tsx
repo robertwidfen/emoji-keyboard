@@ -340,7 +340,7 @@ class App extends Component<{}, AppState> implements AppActions {
 
 	public send(cluster: string, {noRecent, variantOf}: { noRecent?: boolean, variantOf?: string }): void {
 		ahkSend(cluster);
-		if (!noRecent) increaseRecent(cluster);
+		increaseRecent(cluster);
 		if (variantOf) app().updateConfig(c => {
 			if (c.preferredVariant[variantOf] != cluster) return {
 				preferredVariant: {
