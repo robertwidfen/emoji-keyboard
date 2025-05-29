@@ -22,7 +22,7 @@ SetWorkingDir(A_ScriptDir)	; Ensures a consistent starting directory
 SendMode("Input")
 
 ; Setup tray menu
-TraySetIcon("lib/keyboard.ico")
+TraySetIcon("lib/emoji-keyboard.ico")
 A_IconTip := "Emoji Keyboard"
 A_TrayMenu.Delete()
 A_TrayMenu.Add("&Show", ActToggle)
