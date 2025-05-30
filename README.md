@@ -1,18 +1,32 @@
 Emoji Keyboard (Emoji 17)
-==============
-[💾 Download](https://github.com/gilleswaeber/emoji-keyboard/releases/latest/download/emoji-keyboard.zip) *or see instructions below for cloning*
+=========================
 
-<img alt="Screenshot" src="https://i.imgur.com/qpVBhXt.png" width="786" />
+- Includes thousands of emojis 😀
+- Lightning-fast operation using only keyboard ⌨️ strokes 👆
+- Powerful and efficient search 🔍
+- Combined favorites ⭐ and recently ↺ used list
+- Highly customizable with many settings 🛠
+- ...
 
-Packed with thousands of Emojis!
+[💾 Download](https://github.com/gilleswaeber/emoji-keyboard/releases/latest/download/emoji-keyboard.zip) *or see instructions below for cloning*.
+
 Requires Windows 7+
 , and [Autohotkey v2](https://autohotkey.com/).
 , [WebView2](https://go.microsoft.com/fwlink/p/?LinkId=2124703) (comes with Windows 10+)
 
+Demo
+----
+
+<img alt="emoji-keyboard-demo" src="https://github.com/user-attachments/assets/bbec2487-2aff-497d-b692-106e79acbe83" width="700" />
+
 Alternatives
 ------------
+
+Basically there is none! 😉
+
 Since Windows 10 April 2018 Update, you can open the built-in emoji picker with <kbd>Win</kbd>+<kbd>.</kbd>.
-It is missing support for flags and emojis newer than the OS.
+It is missing support for flags and emojis newer than the OS. In Windows 11 it got worse with the new picker
+recently used list is much shorter and using it just by keyboard is a pain.
 
 Issues
 ------
