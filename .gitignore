@@ -10,6 +10,9 @@
 /wwwassets/fonts/*
 !/wwwassets/fonts/AdobeBlank.otf
 *.js.map
+package-lock.json
+package.json
+wwwassets/script/unidata.tmp.d.ts
 /emoji-keyboard.zip
 /local
 # User configuration
