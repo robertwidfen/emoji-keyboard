@@ -6,8 +6,8 @@ Emoji Keyboard (Emoji 16)
 
 Packed with thousands of Emojis!
 Requires Windows 7+
+, and [Autohotkey v2](https://autohotkey.com/).
 , [WebView2](https://go.microsoft.com/fwlink/p/?LinkId=2124703) (comes with Windows 10+)
-, and [Autohotkey](https://autohotkey.com/).
 
 Alternatives
 ------------
@@ -16,7 +16,7 @@ It is missing support for flags and emojis newer than the OS.
 
 How to use
 ----------
-Install [Autohotkey](https://autohotkey.com/), download using the link at the top, and then launch App.ahk. It will then stay in
+Install [Autohotkey v2](https://autohotkey.com/), download using the link at the top, and then launch App.ahk. It will then stay in
 system tray until you call it.
 
 Open it with the <kbd>⇧ Shift</kbd>+<kbd>Caps Lock</kbd> combination.
