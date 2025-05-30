@@ -15,6 +15,7 @@ package.json
 wwwassets/script/unidata.tmp.d.ts
 /emoji-keyboard.zip
 /local
+demo/demo.md
 # User configuration
 /config.json
 /hotkey.ahk

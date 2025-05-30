@@ -1,0 +1,13 @@
+diff --git a/App.ahk b/App.ahk
+index 012527d..341da89 100644
+--- a/App.ahk
++++ b/App.ahk
+@@ -384,7 +384,7 @@ class EmojiKeyboard {
+             gc := GetCaretPosition(&xc, &yc, &wc, &hc)
+             if (gc > 0 and xc >= left and xc <= right and yc >= top and yc <= bottom) {
+                 ; center around caret
+-                x := xc - (w + wo) / 2
++                ; x := xc - (w + wo) / 2
+                 ; place over the caret if there is enough space
+                 if (yc > top + yo + h + ho + caretDistance) {
+                     y := yc - h - ho - caretDistance
