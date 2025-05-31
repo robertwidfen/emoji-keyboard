@@ -121,8 +121,19 @@ export function ahkSetSearch(state: boolean) {
 }
 
 export function ahkSaveConfig(config: AppConfig) {
-	if (isAHK()) AHK!.saveConfig(JSON.stringify(config, null, 4));
-	else console.log("SaveConfig", config);
+	const indent = 4
+	const indentStr = " ".repeat(indent)
+
+	// stringify recent items as onliners
+	const recentString = config.recent.map(item => JSON.stringify(item)).join(`,\n${indentStr.repeat(2)}`);
+	const jsonStr = JSON.stringify(config,
+		(key, value) => {
+			if (key === "recent") return "RECENT_LIST";
+			return value;
+		}, indent).replace('"RECENT_LIST"', `[\n${indentStr.repeat(2)}${recentString}\n${indentStr}]`)
+
+	if (isAHK()) AHK!.saveConfig(jsonStr);
+	else console.log("SaveConfig", jsonStr);
 }
 
 export function ahkSaveUnicodeData(data: ConsolidatedUnicodeData) {

@@ -13,6 +13,7 @@ import {Symbol} from "./keys/symbol";
 import {AppConfig} from "./config";
 import {toHex} from "./builder/consolidated";
 import {KeyCap} from "./config/boards";
+import {sortRecent} from "./recentsActions";
 
 export class ConfigKey extends Key {
 	constructor() {
@@ -240,6 +241,8 @@ export class RecentKey extends Key {
 	}
 
 	act() {
+		// sort recent list only when opening to avoid items jumping around
+		sortRecent(app().getConfig().recent)
 		app().setMode(AppMode.RECENTS);
 	}
 }

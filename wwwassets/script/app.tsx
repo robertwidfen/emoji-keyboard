@@ -225,6 +225,8 @@ class App extends Component<{}, AppState> implements AppActions {
 	}
 
 	public async setConfig(config: string) {
+		// migrate config poor man style
+		config = config.replace(/^            "useCount":/gm, '            "score":');
 		await this.updateConfig(JSON.parse(config), false);
 		ahkReady();
 	}

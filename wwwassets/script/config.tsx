@@ -83,7 +83,7 @@ type InputMode = "clipboard" | "ctrl+v" | "shift+insert" | "raw";
 
 export interface RecentEmoji {
 	symbol: string;
-	useCount: number;
+	score: number;
 }
 
 export interface AppConfig {
