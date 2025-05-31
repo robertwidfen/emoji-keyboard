@@ -82,7 +82,7 @@ type OpenAt = "last-position" | "bottom" | "text-caret" | "mouse";
 
 export interface RecentEmoji {
 	symbol: string;
-	useCount: number;
+	score: number;
 }
 
 export interface AppConfig {

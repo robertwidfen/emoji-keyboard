@@ -27,8 +27,10 @@ Use the shown keyboard keys to navigate between the categories and type the Emoj
 Keymap matches the one of your system automatically.
 
 The recent list opens with <kbd>Caps Lock</kbd> and shows a list of recent Emojis sorted on opening by their *score*. Inserting an Emoji increments its *score* and decrement other's.
+The recent list opens with <kbd>⇪ Caps Lock</kbd> and shows a list of recent Emojis sorted on opening by their *score*. Inserting an Emoji increments its *score* and decrement other's.
 A *score* ≥ 100 makes it a favorite that'll stay in the list.
 Emojis can be removed and marked as favorites with a right click or <kbd>⇧ Shift</kbd> when in the recent tab.
+To reorder or modify the recent list items directly, exit the app and edit the *config.json* in a text editor.
 
 To exit completely, do a right click on the tray icon and choose Exit.
 

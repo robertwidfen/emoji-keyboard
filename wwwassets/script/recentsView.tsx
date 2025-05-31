@@ -29,17 +29,17 @@ export class RecentBoard extends Board {
 	}
 }
 
-function useUseCount(cluster: string) {
+function getScore(cluster: string) {
 	const recent = useContext(ConfigContext).recent;
-	return useMemo(() => recent.find(r => r.symbol == cluster)?.useCount ?? 0, [cluster, recent]);
+	return useMemo(() => recent.find(r => r.symbol == cluster)?.score ?? 0, [cluster, recent]);
 }
 
 export class RecentClusterKey extends Key {
 	constructor(private cluster: string) {
-		const useCount = useUseCount(cluster);
+		const score = getScore(cluster);
 		const name = clusterName(cluster);
 		super({
-			name: `${name}, score: ${useCount >= 100 ? "★" : useCount}`,
+			name: `${name}, score: ${score >= 100 ? "★" : score}`,
 			symbol: cluster,
 			keyType: "char",
 		});
@@ -64,14 +64,14 @@ export class RecentSettingsBoard extends Board {
 
 	Contents = () => {
 		useEffect(() => app().updateStatus(), []);
-		const useCount = useUseCount(this.cluster);
+		const score = getScore(this.cluster);
 		const keys: SlottedKeys = {
 			[SC.Backtick]: new BackKey(),
 			...mapKeysToSlots(DigitsRow, [
 				new ConfigToggleKey({
 					name: "Favorite",
 					symbol: "⭐",
-					active: useCount >= FAVORITE_SCORE,
+					active: score >= FAVORITE_SCORE,
 					action: () => toggleFavorite(this.cluster)
 				}),
 				new ConfigActionKey({
@@ -81,7 +81,7 @@ export class RecentSettingsBoard extends Board {
 					}
 				})
 			]),
-			[SC.Q]: new ConfigLabelKey(`Score: ${useCount}, +${SCORE_INCR} when used, -${SCORE_DECR} when others used`),
+			[SC.Q]: new ConfigLabelKey(`Score: ${score}, +${SCORE_INCR} when used, -${SCORE_DECR} when others used`),
 			[SC.A]: new ConfigLabelKey(`Favorite when score ≥ ${FAVORITE_SCORE}`),
 		}
 		return <Keys keys={keys}/>
