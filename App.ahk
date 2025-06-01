@@ -12,7 +12,6 @@ if (!FileExist("lib/thqby/WebView2/64bit/WebView2Loader.dll")) {
 #Include lib/thqby/WebView2/WebView2.ahk
 #Include lib/monitor.ahk
 #Include lib/caret.ahk
-#Include lib/clipboard.ahk
 #Include lib/keyboard_layout.ahk
 #Include *i hotkey.ahk
 
@@ -263,20 +262,13 @@ class EmojiKeyboard {
             FileMove("wwwassets/script/unidata.tmp.d.ts", "wwwassets/script/unidata.d.ts", true)
         }
         onSend(text) {
-            SetTimer(RestoreClipboard,0)
             isActive := WinActive(this.main)
             ; if we have received focus give it back
             if (isActive) {
                 ControlFocus(this.WindowActiveOnShow)
             }
-            if(!this.isClipSaved) {
-                this.clipSaved := ClipboardAll()
-                this.isClipSaved := True
-            }
-            SetClipboardPrivate(text)
             Sleep(10)
-            Send("^v")
-            SetTimer(RestoreClipboard,500)
+            SendInput(text)
             if (isActive) {
                 this.Show()
             }
@@ -446,14 +438,8 @@ class EmojiKeyboard {
         this.wv.PostWebMessageAsJson('["layout",' layout ']')
     }
 }
+
 KB := EmojiKeyboard()
-;EmojiKeyboard.main.Hide()
-RestoreClipboard() {
-    SetTimer(RestoreClipboard, 0)
-    A_Clipboard := KB.clipSaved
-    KB.clipSaved := unset
-    KB.isClipSaved := False
-}
 
 CheckLayout() {
     cKeyboard := CurrentKeyboardLayout()
