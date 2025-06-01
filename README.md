@@ -14,6 +14,21 @@ Alternatives
 Since Windows 10 April 2018 Update, you can open the built-in emoji picker with <kbd>Win</kbd>+<kbd>.</kbd>.
 It is missing support for flags and emojis newer than the OS.
 
+Issues
+------
+There are three methods for inserting the emoji with different pros and cons:
+- Copy to clipboard and send <kbd>Ctrl-V</kbd> to app:
+  - Relies on <kbd>Ctrl-V</kbd> being bound in the receiving app. For terminals you may not want this as it is already bound by shells, vim etc.
+  - Inserting by key repeat eventually will insert the key itself instead of the emoji and may also make the app to lose the hotkey bindings.
+- Copy to clipboard and send <kbd>Ctrl-Insert</kbd> to app: Same like last one, just older binding.
+- Raw direct sending of the emoji as text:
+  - Is fast and does not have the issues of the other methods.
+  - Some apps may not handle the inserted emoji correctly, e.g.:
+    - WhatsApp Web does not show emojis skin tone until you send the message.
+    - Google Keep Web saves the emoji as "??" - you basically lose it. Workaround before saving: <kbd>Ctrl-A Ctrl-C Ctrl-V</kbd>, i.e. copy and paste from clipboard.
+
+You can switch between the methods in the configuration.
+
 How to use
 ----------
 Install [Autohotkey v2](https://autohotkey.com/), download using the link at the top, and then launch App.ahk. It will then stay in system tray until you call it.
