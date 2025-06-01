@@ -250,11 +250,11 @@ class App extends Component<{}, AppState> implements AppActions {
 					noop = true;
 					return {};
 				}
-				if (config.theme && s.config.theme != config.theme) {
+				if (config.theme != undefined && s.config.theme != config.theme) {
 					const link = document.getElementById('themeCSS') as HTMLLinkElement;
 					link.href = ThemesMap.get(config.theme)?.url ?? DefaultThemeUrl;
 				}
-				if (config.openAt) {
+				if (config.openAt != undefined && s.config.openAt != config.openAt) {
 					ahkSetOpenAt(config.openAt);
 				}
 				// must check explicitly as 0 is false
@@ -262,7 +262,7 @@ class App extends Component<{}, AppState> implements AppActions {
 					config.width != undefined && config.height != undefined)) {
 					ahkSetPosSize(config.x, config.y, config.width, config.height);
 				}
-				if (config.opacity && s.config.opacity != config.opacity) {
+				if (config.opacity != undefined && s.config.opacity != config.opacity) {
 					ahkSetOpacity(config.opacity);
 				}
 				if (config.devTools && !s.config.devTools) {
