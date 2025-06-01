@@ -96,6 +96,8 @@ class EmojiKeyboard {
     isClipSaved := false
     clipSaved := unset
 
+    WindowActiveOnShow := 0
+
     __New() {
         this.text := this.main.AddText(, "Please wait...")
         onClose(*) {
@@ -263,8 +265,9 @@ class EmojiKeyboard {
         onSend(text) {
             SetTimer(RestoreClipboard,0)
             isActive := WinActive(this.main)
+            ; if we have received focus give it back
             if (isActive) {
-                this.Hide()
+                ControlFocus(this.WindowActiveOnShow)
             }
             if(!this.isClipSaved) {
                 this.clipSaved := ClipboardAll()
@@ -346,6 +349,9 @@ class EmojiKeyboard {
             this.Initialize()
             Return
         }
+
+        ; save active window - we may need to give focus back to it in onSend()
+        this.WindowActiveOnShow := WinActive("A")
 
         w := this.width * A_Scaling
         h := this.height * A_Scaling
