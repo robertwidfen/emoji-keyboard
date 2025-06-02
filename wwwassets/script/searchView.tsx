@@ -20,7 +20,6 @@ export class SearchBoard extends Board {
 		useEffect(() => (document.querySelector('input[type="search"]') as HTMLInputElement)?.focus(), []);
 		const keys = useMemo(() => ({
 			[SC.Backtick]: new ExitSearchKey(),
-			[SC.Tab]: new ExitSearchKey(),
 			[SC.CapsLock]: new RecentKey(),
 			...mapKeysToSlots(SearchKeyCodes, search(searchText).slice(0, SearchKeyCodes.length).map((c) => new ClusterKey(c)))
 		}), [searchText]);

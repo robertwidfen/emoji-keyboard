@@ -26,7 +26,13 @@ To change the shortcut, edit *hotkey.ahk* which is created the first time you st
 Use the shown keyboard keys to navigate between the categories and type the Emojis. You can also use the mouse. You can move the window and resize it as you wish.
 Keymap matches the one of your system automatically.
 
-The recent list opens with <kbd>Caps Lock</kbd> and shows a list of recent Emojis sorted on opening by their *score*. Inserting an Emoji increments its *score* and decrement other's.
+<kbd>↹ Tab</kbd> opens the keyword search for emojis. It scores the entries,
++1 for full word match, -1 for a match not at the start of a word.
+If focus stays in the current window you can only enter letters and <kbd>␣ Space</kbd>.
+<kbd>⌫ Backspace</kbd> will delete the last character. To enter Emoji Keyboards search
+field type <kbd>↹ Tab</kbd> again, now you can edit in the search field. Selecting a search
+result will bring you back to the original window.
+
 The recent list opens with <kbd>⇪ Caps Lock</kbd> and shows a list of recent Emojis sorted on opening by their *score*. Inserting an Emoji increments its *score* and decrement other's.
 A *score* ≥ 100 makes it a favorite that'll stay in the list.
 Emojis can be removed and marked as favorites with a right click or <kbd>⇧ Shift</kbd> when in the recent tab.

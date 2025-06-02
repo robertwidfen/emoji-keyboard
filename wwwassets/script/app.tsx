@@ -195,8 +195,23 @@ class App extends Component<{}, AppState> implements AppActions {
 	public input(key: number, shift: boolean = false) {
 		const s = this.state;
 		switch (s.mode) {
-			case AppMode.MAIN:
 			case AppMode.SEARCH:
+				const ignoredKeys: SC[] = [
+					SC.LeftBrace, SC.RightBrace, SC.Enter, SC.Ctrl,
+					SC.Semicolon, SC.Apostrophe, SC.Backtick, SC.Shift, SC.Backslash
+				]
+				if (key == SC.Backspace) {
+					this.setSearchText(this.state.searchText.slice(0, -1))
+				}
+				else if (key == SC.Space && !this.state.searchText.endsWith(" ")) {
+					this.setSearchText(this.state.searchText + ' ')
+				}
+				else if (!ignoredKeys.includes(key) && (key >= SC.Q && key <= SC.M)) {
+					let char = this.state.layout[key as SC]?.name ?? ''
+					this.setSearchText(this.state.searchText + char)
+					break
+				}
+			case AppMode.MAIN:
 			case AppMode.SETTINGS:
 			case AppMode.RECENTS:
 				// animate keypress

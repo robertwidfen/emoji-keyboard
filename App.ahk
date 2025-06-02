@@ -262,16 +262,11 @@ class EmojiKeyboard {
             FileMove("wwwassets/script/unidata.tmp.d.ts", "wwwassets/script/unidata.d.ts", true)
         }
         onSend(text) {
-            isActive := WinActive(this.main)
             ; if we have received focus give it back
-            if (isActive) {
+            if (WinActive(this.main)) {
                 ControlFocus(this.WindowActiveOnShow)
             }
-            Sleep(10)
             SendInput(text)
-            if (isActive) {
-                this.Show()
-            }
         }
         onSetOpacity(opacity) {
             if (opacity > .99) {
@@ -292,18 +287,7 @@ class EmojiKeyboard {
             this.height := height
         }
         onSetSearch(enable) {
-            if (this.isSearch != enable) {
-                this.isSearch := enable
-                if (enable) {
-                    this.main.Opt("-E0x08000000")
-                    this.main.Show()
-                } else {
-                    if (WinActive(this.main)) {
-                        Send("!{Esc}")
-                    }
-                    this.main.Opt("+E0x08000000")
-                }
-            }
+            this.isSearch := enable
         }
         onSetTitle(title) {
             this.main.Title := title
@@ -402,7 +386,7 @@ class EmojiKeyboard {
         x := clamp(x, minx, maxx)
         y := clamp(y, miny, maxy)
 
-        this.main.Show(Format("{} X{} Y{} W{} H{}", this.isSearch ? "" : "NA", x, y, w, h))
+        this.main.Show(Format("NA X{} Y{} W{} H{}", x, y, w, h))
 
         this.wvc.Fill()
         CheckLayout()
@@ -464,7 +448,20 @@ ActCredits(*) {
 
 ; To change the activation hotkey, edit hotkey.ahk
 
+#HotIf KB.isVisible and KB.isSearch and !WinActive(KB.main)
+Tab::WinActivate(KB.main)
++Tab:: WinActivate(KB.main)
+BackSpace::KB.Input(14, False)
+Space::KB.Input(57, False)
+
+#HotIf KB.isVisible and !KB.isSearch
+Tab:: KB.Input(15, False)
++Tab:: KB.Input(15, True)
+
 #HotIf KB.isVisible
+Esc:: KB.Hide()
+CapsLock::KB.Input(58, False)
+
 ; Corresponding keys          US   CH
 SC029:: KB.Input(41, False)	; `    §
 SC002:: KB.Input(02, False)	; 1    1
@@ -492,25 +489,7 @@ SC00D:: KB.Input(13, False)	; =    ^
 +SC00B:: KB.Input(11, True)	; 0    0
 +SC00C:: KB.Input(12, True)	; -    '
 +SC00D:: KB.Input(13, True)	; =    ^
-Tab:: KB.Input(15, False)
-+Tab:: KB.Input(15, True)
-Esc:: KB.Hide()
-Capslock::KB.Input(58, False)
-#HotIf KB.isVisible and !KB.isSearch
-; Corresponding keys          US   CH
-;SC001::KB.Input(01, False) ; ESC  ESC
-;SC03B::KB.Input(59, False) ; F1   F1
-;SC03C::KB.Input(60, False) ; F2   F2
-;SC03D::KB.Input(61, False) ; F3   F3
-;SC03E::KB.Input(62, False) ; F4   F4
-;SC03F::KB.Input(63, False) ; F5   F5
-;SC040::KB.Input(64, False) ; F6   F6
-;SC041::KB.Input(65, False) ; F7   F7
-;SC042::KB.Input(66, False) ; F8   F8
-;SC043::KB.Input(67, False) ; F9   F9
-;SC044::KB.Input(68, False) ; F10  F10
-;SC057::KB.Input(87, False) ; F11  F11
-;SC058::KB.Input(88, False) ; F12  F12
+
 SC010:: KB.Input(16, False)	; q    q
 SC011:: KB.Input(17, False)	; w    w
 SC012:: KB.Input(18, False)	; e    e
@@ -523,6 +502,7 @@ SC018:: KB.Input(24, False)	; o    o
 SC019:: KB.Input(25, False)	; p    p
 SC01A:: KB.Input(26, False)	; [    èü
 SC01B:: KB.Input(27, False)	; ]    ¨
+
 SC01E:: KB.Input(30, False)	; a    a
 SC01F:: KB.Input(31, False)	; s    s
 SC020:: KB.Input(32, False)	; d    d
@@ -536,6 +516,7 @@ SC027:: KB.Input(39, False)	; ;    éö
 SC028:: KB.Input(40, False)	; '    àä
 SC02B:: KB.Input(43, False)	; \    $
 SC056:: KB.Input(86, False)	; N/A  <
+
 SC02C:: KB.Input(44, False)	; z    y
 SC02D:: KB.Input(45, False)	; x    x
 SC02E:: KB.Input(46, False)	; c    c
@@ -546,6 +527,7 @@ SC032:: KB.Input(50, False)	; m    m
 SC033:: KB.Input(51, False)	; ,    ,
 SC034:: KB.Input(52, False)	; .    .
 SC035:: KB.Input(53, False)	; /    -
+
 +SC010:: KB.Input(16, True)	; q    q
 +SC011:: KB.Input(17, True)	; w    w
 +SC012:: KB.Input(18, True)	; e    e
@@ -558,6 +540,7 @@ SC035:: KB.Input(53, False)	; /    -
 +SC019:: KB.Input(25, True)	; p    p
 +SC01A:: KB.Input(26, True)	; [    èü
 +SC01B:: KB.Input(27, True)	; ]    ¨
+
 +SC01E:: KB.Input(30, True)	; a    a
 +SC01F:: KB.Input(31, True)	; s    s
 +SC020:: KB.Input(32, True)	; d    d
@@ -571,6 +554,7 @@ SC035:: KB.Input(53, False)	; /    -
 +SC028:: KB.Input(40, True)	; '    àä
 +SC02B:: KB.Input(43, True)	; \    $
 +SC056:: KB.Input(86, True)	; N/A  <
+
 +SC02C:: KB.Input(44, True)	; z    y
 +SC02D:: KB.Input(45, True)	; x    x
 +SC02E:: KB.Input(46, True)	; c    c
