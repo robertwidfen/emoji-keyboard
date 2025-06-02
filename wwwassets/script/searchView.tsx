@@ -17,7 +17,14 @@ export class SearchBoard extends Board {
 	Contents(): preact.VNode {
 		const searchText = useContext(SearchContext);
 		const onInput = useCallback((e: InputEvent) => app().setSearchText((e.target as HTMLInputElement).value), []);
-		useEffect(() => (document.querySelector('input[type="search"]') as HTMLInputElement)?.focus(), []);
+		useEffect(() => {
+			const input = document.querySelector('input[type="search"]') as HTMLInputElement;
+			if (input) {
+				input.focus();
+				// Select all text after focus
+				requestAnimationFrame(() => input.select());
+			}
+		}, []);
 		const keys = useMemo(() => ({
 			[SC.Backtick]: new ExitSearchKey(),
 			[SC.Tab]: new ExitSearchKey(),
