@@ -33,7 +33,8 @@ export class SearchBoard extends Board {
 		}), [searchText]);
 		app().keyHandlers = keys;
 		return <div class="keyboard">
-			<input type="search" value={searchText} onInput={onInput as any}/>
+			<input type="search" spellcheck={false} placeholder="Space separated keywords"
+				   value={searchText} onInput={onInput as any}/>
 			{SearchKeyCodesTable.map((code) => {
 				const K = (keys[code] ?? BlankKey);
 				return <K.Contents code={code} key={code}/>;
