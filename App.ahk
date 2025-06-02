@@ -334,18 +334,7 @@ class EmojiKeyboard {
             this.height := height
         }
         onSetSearch(enable) {
-            if (this.isSearch != enable) {
-                this.isSearch := enable
-                if (enable) {
-                    this.main.Opt("-E0x08000000")
-                    this.main.Show()
-                } else {
-                    if (WinActive(this.main)) {
-                        Send("!{Esc}")
-                    }
-                    this.main.Opt("+E0x08000000")
-                }
-            }
+            this.isSearch := enable
         }
         onSetTitle(title) {
             this.main.Title := title
@@ -444,7 +433,7 @@ class EmojiKeyboard {
         x := clamp(x, minx, maxx)
         y := clamp(y, miny, maxy)
 
-        this.main.Show(Format("{} X{} Y{} W{} H{}", this.isSearch ? "" : "NA", x, y, w, h))
+        this.main.Show(Format("NA X{} Y{} W{} H{}", x, y, w, h))
 
         this.wvc.Fill()
         CheckLayout()
@@ -512,7 +501,21 @@ ActCredits(*) {
 
 ; To change the activation hotkey, edit hotkey.ahk
 
+#HotIf KB.isVisible and KB.isSearch and !WinActive(KB.main)
+Tab::WinActivate(KB.main)
+BackSpace::KB.Input(14, False)
+Space::KB.Input(57, False)
+
+#HotIf KB.isVisible and KB.isSearch and WinActive(KB.main)
+Tab::WinActivate(KB.WindowActiveOnShow)
+
+#HotIf KB.isVisible and !KB.isSearch
+Tab:: KB.Input(15, False)
+
 #HotIf KB.isVisible
+Esc:: KB.Hide()
+CapsLock::KB.Input(58, False)
+
 ; Base                              US   CH
 SC029::KB.Input(41, False)        ; `    §
 SC002::KB.Input(02, False)        ; 1    1
@@ -570,11 +573,6 @@ SC00D::KB.Input(13, False)        ; =    ^
 !+SC00C::KB.Input(12, True, True) ; -    '
 !+SC00D::KB.Input(13, True, True) ; =    ^
 
-Tab::KB.Input(15, False)
-+Tab::KB.Input(15, True)
-Esc::KB.Hide()
-Capslock::KB.Input(58, False)
-#HotIf KB.isVisible and !KB.isSearch
 ; Corresponding keys                 US   CH
 ;SC001::KB.Input(01, False)        ; ESC  ESC
 ;SC03B::KB.Input(59, False)        ; F1   F1
@@ -589,6 +587,8 @@ Capslock::KB.Input(58, False)
 ;SC044::KB.Input(68, False)        ; F10  F10
 ;SC057::KB.Input(87, False)        ; F11  F11
 ;SC058::KB.Input(88, False)        ; F12  F12
+
+#HotIf KB.isVisible and (!KB.isSearch or !WinActive(KB.main))
 ; Base                               US   CH
 SC010::KB.Input(16, False)         ; q    q
 SC011::KB.Input(17, False)         ; w    w

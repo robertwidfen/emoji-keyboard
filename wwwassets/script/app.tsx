@@ -31,7 +31,7 @@ import {
 } from "./appVar";
 import {useMemo} from "preact/hooks";
 import {SC} from "./layout/sc";
-import {SearchBoard} from "./searchView";
+import {handleSearchInput, SearchBoard} from "./searchView";
 import {BoardState, SlottedKeys} from "./boards/utils";
 import {RecentBoard} from "./recentsView";
 import {increaseRecent} from "./recentsActions";
@@ -201,8 +201,13 @@ class App extends Component<{}, AppState> implements AppActions {
 	public input(key: number, shift: boolean = false, alt: boolean = false) {
 		const s = this.state;
 		switch (s.mode) {
-			case AppMode.MAIN:
 			case AppMode.SEARCH:
+				const needle = handleSearchInput(this.state.layout, key)
+				if (needle != undefined && needle != this.state.searchText) {
+					this.setSearchText(needle)
+					break
+				}
+			case AppMode.MAIN:
 			case AppMode.SETTINGS:
 			case AppMode.RECENTS:
 				// animate keypress
