@@ -12,6 +12,7 @@ if (!FileExist("lib/thqby/WebView2/64bit/WebView2Loader.dll")) {
 #Include lib/thqby/WebView2/WebView2.ahk
 #Include lib/monitor.ahk
 #Include lib/caret.ahk
+#Include lib/darkmode.ahk
 #Include lib/keyboard_layout.ahk
 #Include *i hotkey.ahk
 
@@ -85,6 +86,7 @@ class EmojiKeyboard {
     isSearch := false
     isInitialized := 0 ; 0=not yet invoked, 1=webview loading, 2=settings loaded
     openAt := "bottom"
+    themeMode := "system"
     x := -1
     y := -1
     width := 764
@@ -99,6 +101,7 @@ class EmojiKeyboard {
 
     __New() {
         this.text := this.main.AddText(, "Please wait...")
+
         onClose(*) {
             this.Hide()
         }
@@ -277,6 +280,19 @@ class EmojiKeyboard {
                 WinSetTransparent(Round(255 * .2), this.main)
             }
         }
+        onSetThemeMode(mode) {
+            this.themeMode := mode
+            if (mode == "dark") {
+                SetDarkMode(this.main, 1)
+            }
+            else if (mode == "light") {
+                SetDarkMode(this.main, 0)
+            }
+            else if (mode == "system") {
+                mode := IsWindowsDarkModeActive()
+                SetDarkMode(this.main, mode)
+            }
+        }
         onSetOpenAt(at) {
             this.openAt := at
         }
@@ -299,6 +315,7 @@ class EmojiKeyboard {
         h := 100 * A_Scaling
         x := left + (right - left - w) / 2
         y := top + (bottom - top - h) / 2
+        onSetThemeMode("system")
         this.main.Title := "Emoji Keyboard - Starting up ..."
         this.main.Show(Format("x{} y{} W{} H{}", x, y, w, h))
         ; --disable-web-security to allow fetching data files from e.g. local res folder
@@ -314,6 +331,7 @@ class EmojiKeyboard {
             openDevTools: onOpenDevTools, openLink: onOpenLink,
             ready: onReady, reload: ActReload,
             saveConfig: onSaveConfig, saveUnicodeData: onSaveUnicodeData, send: onSend,
+            SetThemeMode: onSetThemeMode,
             setOpenAt: onSetOpenAt,
             setOpacity: onSetOpacity, setSearch: onSetSearch, setPosSize: onSetPosSize, setTitle: onSetTitle,
 			versions: onVersions

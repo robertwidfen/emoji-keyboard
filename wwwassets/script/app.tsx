@@ -10,6 +10,7 @@ import {
 	ahkSaveConfig,
 	ahkSend,
 	ahkSetOpacity,
+	ahkSetThemeMode,
 	ahkSetOpenAt,
 	ahkSetPosSize,
 	ahkSetSearch,
@@ -262,6 +263,9 @@ class App extends Component<{}, AppState> implements AppActions {
 				if (config.theme && s.config.theme != config.theme) {
 					const link = document.getElementById('themeCSS') as HTMLLinkElement;
 					link.href = ThemesMap.get(config.theme)?.url ?? DefaultThemeUrl;
+				}
+				if (config.themeMode && s.config.themeMode != config.themeMode) {
+					ahkSetThemeMode(config.themeMode?? "system");
 				}
 				if (config.openAt) {
 					ahkSetOpenAt(config.openAt);
