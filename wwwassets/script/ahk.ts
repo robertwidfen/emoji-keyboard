@@ -11,6 +11,7 @@ type HostObject = {
 	saveConfig(config: string): void;
 	saveUnicodeData(data: string, types: string): void;
 	send(text: string, mode: "clipboard" | "ctrl+v" | "shift+insert" | "raw"): void;
+	setThemeMode(mode: string): void;
 	setOpenAt(at: string): void;
 	setOpacity(opacity: number): void;
 	setTitle(title: string): void;
@@ -151,6 +152,11 @@ export function ahkSaveUnicodeData(data: ConsolidatedUnicodeData) {
 export function ahkSetPosSize(x: number, y: number, width: number, height: number) {
 	if (isAHK()) AHK!.setPosSize(x, y, width, height);
 	else console.log("SetPosSize", x, y, width, height);
+}
+
+export function ahkSetThemeMode(mode: string) {
+	if (isAHK()) AHK!.setThemeMode(mode);
+	else console.log("SetThemeMode", mode);
 }
 
 export function ahkSetOpenAt(at: string) {

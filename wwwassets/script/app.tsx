@@ -10,6 +10,7 @@ import {
 	ahkSaveConfig,
 	ahkSend,
 	ahkSetOpacity,
+	ahkSetThemeMode,
 	ahkSetOpenAt,
 	ahkSetPosSize,
 	ahkSetSearch,
