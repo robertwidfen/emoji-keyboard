@@ -6,9 +6,11 @@ import {Keys, mapKeysToSlots, SlottedKeys} from "./boards/utils";
 import {h} from "preact";
 import {Board} from "./board";
 import {Key} from "./keys/base";
-import {clusterName} from "./unicodeInterface";
+import {clusterAliases, clusterName} from "./unicodeInterface";
 import {DigitsRow} from "./layout";
 import {FAVORITE_SCORE, removeRecent, SCORE_DECR, SCORE_INCR, toggleFavorite} from "./recentsActions";
+import {toCodePoints} from "./builder/builder";
+import {toHex} from "./builder/consolidated";
 
 export class RecentBoard extends Board {
 	constructor() {
@@ -38,10 +40,21 @@ export class RecentClusterKey extends Key {
 	constructor(private cluster: string) {
 		const score = getScore(cluster);
 		const name = clusterName(cluster);
+		let sName = ""
+		if (app().getConfig().showCharCodes) {
+			sName += `[U+${toCodePoints(cluster).map(toHex).join(', U+')}] `
+		}
+		sName += `${name}`
+		if (app().getConfig().showAliases) {
+			const aliases = clusterAliases(cluster);
+			if (aliases.length) sName += ` (${aliases.join(', ')})`;
+		}
+
 		super({
-			name: `${name}, score: ${score >= 100 ? "★" : score}`,
+			name: `${score >= 100 ? "★" : score}`,
+			statusName: sName,
 			symbol: cluster,
-			keyType: "char",
+			keyType: "recent",
 		});
 	}
 

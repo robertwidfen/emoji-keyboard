@@ -177,6 +177,7 @@ main > section{
 	display: none;
 }
 
+.key.recent .symbol,
 .key.char .symbol{
 	transform: scale(1.2);
 }
@@ -193,6 +194,7 @@ main > section{
 	transform: translateY(-2px) scale(1.4) rotate(7deg);
 }
 
+.key.recent .keypress,
 .key.char .keypress {
 	transform: scale(1) rotate(7deg);
 }
