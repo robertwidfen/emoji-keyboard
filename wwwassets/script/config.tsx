@@ -183,9 +183,9 @@ const ConfigPages: ConfigPage[] = [
 						action() {
 							app().updateConfig({preferredVariant: {}})
 						},
-						active: !Object.keys(config.preferredVariant).length,
+						active: Object.keys(config.preferredVariant).length > 0,
 						name: "Reset Variants",
-						statusName: "Clear variant preferences for all symbols",
+						statusName: `Clear ${Object.keys(config.preferredVariant).length} variant preferences`,
 						symbol: "🥷"
 					})
 					// 	new ConfigLabelKey("Default skin tone")
