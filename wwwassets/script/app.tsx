@@ -211,19 +211,21 @@ class App extends Component<{}, AppState> implements AppActions {
 			case AppMode.MAIN:
 			case AppMode.SETTINGS:
 			case AppMode.RECENTS:
-				// animate keypress
-				var keydiv = document.querySelector('[data-keycode="' + key + '"]')
-				var symboldiv = keydiv?.getElementsByClassName("symbol")[0]
-				symboldiv?.classList.add("keypress")
-				setTimeout(() => {
-					symboldiv?.classList.remove("keypress")
-				}, 100)
-
 				const k = this.keyHandlers[key as SC];
 				if (k) {
 					if (shift) k.actSecondary(alt);
 					else k.act(alt);
 				}
+				// animate keypress after potential state update, since it is lost otherwise,
+				// e.g. when changing the score of recent items selected in recent board.
+				requestAnimationFrame(() => {
+					var keydiv = document.querySelector('[data-keycode="' + key + '"]')
+					var symboldiv = keydiv?.getElementsByClassName("symbol")[0]
+					symboldiv?.classList.add("keypress")
+					setTimeout(() => {
+						symboldiv?.classList.remove("keypress")
+					}, 100 /* be >= style.css: transition: ease .1s */)
+				})
 				break;
 			default:
 				return unreachable(s.mode);
