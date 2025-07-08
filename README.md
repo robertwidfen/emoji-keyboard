@@ -6,8 +6,8 @@ Emoji Keyboard (Emoji 17)
 
 Packed with thousands of Emojis!
 Requires Windows 7+
+, and [Autohotkey v2](https://autohotkey.com/).
 , [WebView2](https://go.microsoft.com/fwlink/p/?LinkId=2124703) (comes with Windows 10+)
-, and [Autohotkey](https://autohotkey.com/).
 
 Alternatives
 ------------
@@ -16,17 +16,16 @@ It is missing support for flags and emojis newer than the OS.
 
 How to use
 ----------
-Install [Autohotkey](https://autohotkey.com/), download using the link at the top, and then launch App.ahk. It will then stay in
-system tray until you call it.
+Install [Autohotkey v2](https://autohotkey.com/), download using the link at the top, and then launch App.ahk. It will then stay in system tray until you call it.
 
-Open it with the <kbd>⇧ Shift</kbd>+<kbd>Caps Lock</kbd> combination.
+Open it with the <kbd>⇧ Shift</kbd>+<kbd>⇪ Caps Lock</kbd> combination.
 You can also use a double click on the tray icon.
 To change the shortcut, edit *hotkey.ahk* which is created the first time you start the program.
 
 Use the shown keyboard keys to navigate between the categories and type the Emojis. You can also use the mouse. You can move the window and resize it as you wish.
 Keymap matches the one of your system automatically.
 
-The recent list opens with <kbd>Caps Lock</kbd> and shows a list of recent Emojis sorted on opening by their *score*. Inserting an Emoji increments its *score* and decrement other's.
+The recent list opens with <kbd>⇪ Caps Lock</kbd> and shows a list of recent Emojis sorted on opening by their *score*. Inserting an Emoji increments its *score* and decrement other's.
 A *score* ≥ 100 makes it a favorite that'll stay in the list.
 Emojis can be removed and marked as favorites with a right click or <kbd>⇧ Shift</kbd> when in the recent tab.
 
