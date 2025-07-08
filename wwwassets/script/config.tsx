@@ -321,71 +321,48 @@ const ConfigPages: ConfigPage[] = [
 		}
 	},
 	{
-		name: "Tools",
-		symbol: "🔨",
+		symbol: "📨",
+		name: "Send Mode",
 		keys(config: AppConfig, l) {
 			return {
 				...mapKeysToSlots(l.freeRows[1], [
-					new ConfigBuildKey(),
-					new ConfigActionKey({
-						action: ahkReload,
-						name: 'Reload',
-						symbol: '🔄'
-					}),
-				]),
-				...mapKeysToSlots(l.freeRows[2], [
 					new ConfigToggleKey({
-						active: config.devTools,
-						statusName: `Open DevTools: ${config.devTools ? 'on' : 'off'}`,
+						active: config.inputMode == "raw",
+						symbol: '🧬',
+						name: 'Raw',
+						statusName: `Send emoji directly (SendRaw)`,
 						action() {
-							app().updateConfig({devTools: !config.devTools});
-						},
-						symbol: '🔬'
+							app().updateConfig({inputMode: "raw"})
+						}
 					}),
-					new ConfigLabelKey("Open DevTools")
-				]),
-			}
-		}
-	},
-	{
-		name: "Input",
-		symbol: "⌨️",
-		keys(config: AppConfig, l) {
-			return {
-				...mapKeysToSlots(l.freeRows[1], [
 					new ConfigToggleKey({
 						active: config.inputMode == "shift+insert",
-						name: 'Send', statusName: `Send the input to the application (Paste with Shift+Insert)`,
-						symbol: '📨',
+						symbol: '📋',
+						name: 'Shift+Ins',
+						statusName: `Send emoji to clipboard and paste with Shift+Insert`,
 						action() {
 							app().updateConfig({inputMode: "shift+insert"})
 						}
 					}),
 					new ConfigToggleKey({
-						active: config.inputMode == "clipboard",
-						name: 'Clipboard', statusName: `Copy to clipboard`,
-						symbol: '📋',
-						action() {
-							app().updateConfig({inputMode: "clipboard"})
-						}
-					}),
-					new ConfigToggleKey({
 						active: config.inputMode == "ctrl+v",
-						name: 'Variant B', statusName: `Use an alternative method to send the input to the application (Paste with Ctrl+V)`,
-						symbol: '📘',
+						symbol: '📋',
+						name: 'Ctrl-V',
+						statusName: `Send emoji to clipboard and paste with Ctrl+V`,
 						action() {
 							app().updateConfig({inputMode: "ctrl+v"})
 						}
 					}),
 					new ConfigToggleKey({
-						active: config.inputMode == "raw",
-						name: 'Variant C', statusName: `Use another alternative method to send the input to the application (AHK SendRaw)`,
-						symbol: '📗',
+						active: config.inputMode == "clipboard",
+						symbol: '📋',
+						name: 'Copy',
+						statusName: `Copy emoji only to clipboard`,
 						action() {
-							app().updateConfig({inputMode: "raw"})
+							app().updateConfig({inputMode: "clipboard"})
 						}
 					}),
-					new ConfigLabelKey('Input Mode')
+					new ConfigLabelKey('Send Mode')
 				]),
 				...mapKeysToSlots(l.freeRows[2], [
 					new ConfigLabelKey("Use Alt+Key/Click to " + (
@@ -416,6 +393,33 @@ const ConfigPages: ConfigPage[] = [
 						symbol: '🔢',
 					}),
 					new ConfigLabelKey('in Status Bar')
+				]),
+			}
+		}
+	},
+	{
+		name: "Tools",
+		symbol: "🔨",
+		keys(config: AppConfig, l) {
+			return {
+				...mapKeysToSlots(l.freeRows[1], [
+					new ConfigBuildKey(),
+					new ConfigActionKey({
+						action: ahkReload,
+						name: 'Reload',
+						symbol: '🔄'
+					}),
+				]),
+				...mapKeysToSlots(l.freeRows[2], [
+					new ConfigToggleKey({
+						active: config.devTools,
+						statusName: `Open DevTools: ${config.devTools ? 'on' : 'off'}`,
+						action() {
+							app().updateConfig({devTools: !config.devTools});
+						},
+						symbol: '🔬'
+					}),
+					new ConfigLabelKey("Open DevTools")
 				]),
 			}
 		}
