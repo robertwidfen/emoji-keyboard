@@ -169,6 +169,7 @@ main > section{
 	right: .2vw;
 	left: .2vw;
 	font-variant: small-caps;
+	z-index: 1;
 }
 
 .key.char .name{
