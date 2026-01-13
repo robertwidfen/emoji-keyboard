@@ -1,3 +1,5 @@
+I stopped working on Emoji Keyboard in favor of Emoji Kbd.
+
 Emoji Keyboard (Emoji 17)
 =========================
 
